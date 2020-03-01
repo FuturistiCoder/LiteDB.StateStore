@@ -10,6 +10,14 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: '5.3.0'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
 
 - task: VSBuild@1
   inputs:
