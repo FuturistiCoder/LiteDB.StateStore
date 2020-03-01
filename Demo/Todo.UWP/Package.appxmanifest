@@ -8,14 +8,14 @@
 
   <Identity
     Name="80dc8f21-9811-4330-adca-4430776cba02"
-    Publisher="CN=Craig"
+    Publisher="CN=FuturistiCoder"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="80dc8f21-9811-4330-adca-4430776cba02" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Todo.UWP</DisplayName>
-    <PublisherDisplayName>Craig</PublisherDisplayName>
+    <PublisherDisplayName>FuturistiCoder</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
