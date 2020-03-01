@@ -5,6 +5,8 @@
 
 trigger:
 - master
+variables:
+  BuildConfiguration: 'Release'
 
 pool:
   vmImage: 'windows-latest'
@@ -35,7 +37,7 @@ steps:
   - task: VSBuild@1
     inputs:
         solution: '**\*.sln'
-        configuration: 'Release'
+        configuration: '$(BuildConfiguration)'
 
   - task: DotNetCoreCLI@2
     displayName: dotnet pack
