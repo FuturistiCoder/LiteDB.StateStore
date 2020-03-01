@@ -10,6 +10,16 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+  - task: DownloadSecureFile@1
+    inputs:
+      secureFile: 'Todo.UWP_TemporaryKey.pfx'
+
+  - task: CopyFiles@2
+    inputs:
+      Contents: '*.pfx'
+      SourceFolder: '$(Agent.TempDirectory)'
+      TargetFolder: './Demo/Todo.UWP/'
+
   - task: GitVersion@5
     inputs:
       runtime: 'full'
