@@ -23,4 +23,3 @@ steps:
   inputs:
     solution: '**\*.sln'
     configuration: 'Release'
-    restoreNugetPackages: true
