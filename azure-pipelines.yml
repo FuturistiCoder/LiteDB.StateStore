@@ -10,16 +10,45 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: NuGetToolInstaller@1
-  inputs:
-    versionSpec: '5.3.0'
+  - task: GitVersion@5
+    inputs:
+      runtime: 'full'
+      preferBundledVersion: false
+      updateAssemblyInfo: true
+    condition: eq(variables['imageName'], 'windows-latest')
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/*.sln'
+  - script: echo %Action%%BuildVersion%
+    displayName: 'Set build version'
+    env:
+      Action: '##vso[build.updatebuildnumber]'
+      BuildVersion: $(GitVersion.SemVer)
+    condition: eq(variables['imageName'], 'windows-latest')
 
-- task: VSBuild@1
-  inputs:
-    solution: '**\*.sln'
-    configuration: 'Release'
+  - task: NuGetToolInstaller@1
+    inputs:
+        versionSpec: '5.3.0'
+
+  - task: NuGetCommand@2
+    inputs:
+        command: 'restore'
+        restoreSolution: '**/*.sln'
+
+  - task: VSBuild@1
+    inputs:
+        solution: '**\*.sln'
+        configuration: 'Release'
+
+  - task: DotNetCoreCLI@2
+    displayName: dotnet pack
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/LiteDB.StateStore.csproj'
+      nobuild: true
+      includesymbols: true
+      arguments: /p:SymbolPackageFormat=snupkg
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'artifacts'
+      publishLocation: 'Container'
