@@ -1,5 +1,7 @@
 # LiteDB.StateStore
 
+[![Build Status](https://dev.azure.com/FuturistiCoder/LiteDB.Realtime/_apis/build/status/FuturistiCoder.LiteDB.Realtime?branchName=master)](https://dev.azure.com/FuturistiCoder/LiteDB.Realtime/_build/latest?definitionId=9&branchName=master)
+
 ## Get started
 
 You can get, set or even subscribe a KeyValue state without writing actions nor reducers.
