@@ -23,6 +23,7 @@ namespace LiteDB.StateStore
             {
                 disposable.Dispose();
             }
+            _disposables.Dispose();
         }
     }
 }
