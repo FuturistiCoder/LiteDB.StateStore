@@ -14,17 +14,29 @@
         public bool Delete()
             => _collection.Delete(_id);
 
-        public T Get()
+        public T Get(T defaultValue)
         {
             var entity = _collection.FindById(_id);
             if (entity is null)
             {
-                return default;
+                return defaultValue;
             }
             return entity.Value;
         }
 
         public bool Set(T value)
             => _collection.Upsert(new KVEntity<T> { Id = _id, Value = value });
+
+        public bool TryGet(out T value)
+        {
+            var entity = _collection.FindById(_id);
+            if (entity is null)
+            {
+                value = default;
+                return false;
+            }
+            value = entity.Value;
+            return true;
+        }
     }
 }
